@@ -13,7 +13,6 @@
 		12529D1A2506495900A73D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12529D192506495900A73D6B /* Assets.xcassets */; };
 		12529D1D2506495900A73D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12529D1B2506495900A73D6B /* LaunchScreen.storyboard */; };
 		12529D532506505B00A73D6B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12529D522506505B00A73D6B /* TableViewController.swift */; };
-		12529D552506506900A73D6B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12529D542506506900A73D6B /* Item.swift */; };
 		12529D582506507800A73D6B /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12529D562506507800A73D6B /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		12529D1C2506495900A73D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12529D1E2506495900A73D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12529D522506505B00A73D6B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		12529D542506506900A73D6B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		12529D572506507800A73D6B /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +89,6 @@
 		12529D592506507E00A73D6B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				12529D542506506900A73D6B /* Item.swift */,
 				12529D562506507800A73D6B /* DataModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -176,7 +173,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12529D552506506900A73D6B /* Item.swift in Sources */,
 				12529D582506507800A73D6B /* DataModel.xcdatamodeld in Sources */,
 				12529D112506495800A73D6B /* AppDelegate.swift in Sources */,
 				12529D532506505B00A73D6B /* TableViewController.swift in Sources */,

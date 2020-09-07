@@ -7,30 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController {
     
     var itemArray = [Item]()
     
-    let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // load items from plist file
+        // load items from context
         loadItems()
-        // if failed to load then stub with default data
-        if itemArray.isEmpty {
-            itemArray = [
-                Item(name: "Buy new iPhone", isChecked: false),
-                Item(name: "Buy new iMac", isChecked: false),
-                Item(name: "Buy Apple Watch", isChecked: false),
-                Item(name: "Buy my Apps!", isChecked: true)
-            ]
-        }
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemButtonTapped))
         
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     @objc func addItemButtonTapped() {
@@ -39,7 +32,11 @@ class TableViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default, handler: {
             (action) in
             if let newTitle = textField.text {
-                self.itemArray.append(Item(name: newTitle, isChecked: false))
+                
+                let item = Item(context: self.context)
+                item.name = textField.text!
+                item.isChecked = false
+                self.itemArray.append(item)
                 let indexPath = IndexPath(row: self.itemArray.count-1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
                 
@@ -70,33 +67,56 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(itemArray[indexPath.row])
-        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        /// updating data in context by setValue:forKey: method of the NSManagedObject
+        //itemArray[indexPath.row].setValue("Item done", forKey: "name")
+        
+        /// updating data in context by simply accessing item in the array
         itemArray[indexPath.row].isChecked = !itemArray[indexPath.row].isChecked
         saveItems()
         
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteItem(for: indexPath)
+        }
+    }
+    
     func saveItems() {
-        let plistEncoder = PropertyListEncoder()
         do {
-            let data = try plistEncoder.encode(itemArray)
-            try data.write(to: filePath!)
+            try context.save()
         } catch {
-            print("Error encoding itemArray: \(error)")
+            print("Error saving context: \(error)")
         }
     }
     
     func loadItems() {
-        let plistDecoder = PropertyListDecoder()
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
         do {
-            let data = try Data(contentsOf: filePath!)
-            itemArray = try plistDecoder.decode([Item].self, from: data)
+            itemArray = try context.fetch(request)
         } catch {
-            print("Error decoding data from file: \(error)")
+            print("Error fetching data from context: \(error)")
         }
+    }
+    
+    func deleteItem(for indexPath: IndexPath) {
+        let item = itemArray[indexPath.row]
+        itemArray.remove(at: indexPath.row)
+        context.delete(item)
+
+        saveItems()
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
 }
