@@ -12,6 +12,8 @@ class TableViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    // if file does not exists the app will work with an exception
+    // FIXME: - Add check for file existence
     let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
