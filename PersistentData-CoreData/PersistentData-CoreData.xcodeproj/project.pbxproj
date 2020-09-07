@@ -14,6 +14,7 @@
 		12529D1D2506495900A73D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12529D1B2506495900A73D6B /* LaunchScreen.storyboard */; };
 		12529D28250649BD00A73D6B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12529D25250649BD00A73D6B /* TableViewController.swift */; };
 		12529D29250649BD00A73D6B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12529D27250649BD00A73D6B /* Item.swift */; };
+		12529D5125064D5000A73D6B /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12529D4F25064D5000A73D6B /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		12529D1E2506495900A73D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12529D25250649BD00A73D6B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		12529D27250649BD00A73D6B /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		12529D5025064D5000A73D6B /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				12529D27250649BD00A73D6B /* Item.swift */,
+				12529D4F25064D5000A73D6B /* DataModel.xcdatamodeld */,
 			);
 			name = Model;
 			path = "../../PersistentData-Codable/PersistentData-Codable/Model";
@@ -176,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12529D29250649BD00A73D6B /* Item.swift in Sources */,
+				12529D5125064D5000A73D6B /* DataModel.xcdatamodeld in Sources */,
 				12529D112506495800A73D6B /* AppDelegate.swift in Sources */,
 				12529D28250649BD00A73D6B /* TableViewController.swift in Sources */,
 				12529D132506495800A73D6B /* SceneDelegate.swift in Sources */,
@@ -378,6 +382,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		12529D4F25064D5000A73D6B /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				12529D5025064D5000A73D6B /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 12529D5025064D5000A73D6B /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 12529D052506495800A73D6B /* Project object */;
 }
