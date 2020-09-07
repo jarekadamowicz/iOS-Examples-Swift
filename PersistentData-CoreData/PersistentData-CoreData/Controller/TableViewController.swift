@@ -13,11 +13,14 @@ class TableViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.delegate = self
         // load items from context
         loadItems()
 
@@ -119,4 +122,26 @@ class TableViewController: UITableViewController {
         self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
+}
+
+// MARK: - SearchBar delegate
+extension TableViewController : UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
+        
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching date from request: \(error)")
+        }
+        
+        tableView.reloadData()
+    }
 }
