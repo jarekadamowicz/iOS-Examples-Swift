@@ -104,13 +104,14 @@ class TableViewController: UITableViewController {
         }
     }
     
-    func loadItems() {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+//        let request : NSFetchRequest<Item> = Item.fetchRequest()
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context: \(error)")
         }
+        tableView.reloadData()
     }
     
     func deleteItem(for indexPath: IndexPath) {
@@ -128,20 +129,15 @@ class TableViewController: UITableViewController {
 extension TableViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
         let request : NSFetchRequest<Item> = Item.fetchRequest()
+
         let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         
         request.predicate = predicate
-        
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("Error fetching date from request: \(error)")
-        }
-        
-        tableView.reloadData()
+  
+        loadItems(with: request)
     }
 }
